@@ -1,0 +1,22 @@
+[package]
+name = "junobuild-didc"
+version = "0.0.1"
+edition = "2021"
+description = "A CLI tool for generating JavaScript or TypeScript content from a DID file using the didc tool."
+authors = ["David Dal Busco <https://daviddalbusco.com>"]
+repository = "https://github.com/junobuild/didc"
+homepage = "https://juno.build"
+documentation = "https://docs.rs/junobuild-didc"
+readme = "README.md"
+license = "MIT"
+keywords = ["candid", "didc", "javascript", "bindings", "CLI"]
+categories = ["command-line-utilities", "web-programming", "wasm"]
+
+[[bin]]
+name = "junobuild-didc"
+path = "src/main.rs"
+
+[dependencies]
+candid_parser = "0.1.4"
+clap = { version = "4", features = ["derive"] }
+anyhow = "1.0.87"
