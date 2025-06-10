@@ -42,6 +42,14 @@ cd didc
 cargo build --release
 ```
 
+Once built, the binary will be located in `target/release`. You can run it from the root directory:
+
+```bash
+./target/release/junobuild-didc --help
+```
+
+This will display the available commands and usage instructions.
+
 ### Running Tests
 
 You can run the tests with:
