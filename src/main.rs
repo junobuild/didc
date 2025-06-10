@@ -1,5 +1,6 @@
 use anyhow::Result;
 use candid_parser::bindings::{javascript, typescript};
+use candid_parser::pretty;
 use candid_parser::pretty_check_file;
 use clap::Parser;
 use std::fs::{create_dir_all, write};
@@ -18,8 +19,8 @@ struct Cli {
     #[clap(short, long)]
     output: Option<PathBuf>,
 
-    /// Target output format: either `js` for JavaScript or `ts` for TypeScript.
-    #[clap(short, long, value_parser = ["js", "ts"])]
+    /// Target output format: either `js` for JavaScript, `ts` for TypeScript or `did` for Candid.
+    #[clap(short, long, value_parser = ["js", "ts", "did"])]
     target: String,
 }
 
@@ -45,14 +46,14 @@ fn write_output(output_path: &Path, content: &str) -> Result<()> {
     Ok(())
 }
 
-/// A function to generate JavaScript or TypeScript content from a DID file.
+/// A function to generate JavaScript, TypeScript, or DID content from a `.did` file.
 ///
-/// This main function serves as a wrapper around the `didc` tool, parsing the command-line arguments,
-/// processing the input `.did` file, and either printing the compiled output to stdout or writing it
-/// to a specified file based on user input.
+/// This `main` function serves as a wrapper around the `didc` tool. It parses command-line arguments,
+/// processes the input `.did` file, and outputs the result either to stdout or to a specified file,
+/// depending on user input.
 ///
-/// This function leverages `didc`'s capabilities for parsing and compiling Candid files into JavaScript
-/// or TypeScript bindings, allowing users to seamlessly generate the necessary bindings for their projects.
+/// The parser resolves any imported services and produces a single, self-contained output file
+/// — whether it's JavaScript, TypeScript, or a `.did` definition.
 ///
 /// # Errors
 ///
@@ -65,6 +66,7 @@ fn main() -> Result<()> {
     let content = match cli.target.as_str() {
         "ts" => typescript::compile(&env, &actor),
         "js" => javascript::compile(&env, &actor),
+        "did" => pretty::candid::compile(&env, &actor),
         _ => unreachable!(),
     };
 
