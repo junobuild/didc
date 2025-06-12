@@ -9,7 +9,7 @@ homepage = "https://juno.build"
 documentation = "https://docs.rs/junobuild-didc"
 readme = "README.md"
 license = "MIT"
-keywords = ["candid", "didc", "javascript", "bindings", "CLI"]
+keywords = ["candid", "idl", "javascript", "bindings", "CLI"]
 categories = ["command-line-utilities", "web-programming", "wasm"]
 
 [[bin]]
