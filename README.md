@@ -1,6 +1,6 @@
 # JunoBuild-Didc
 
-`junobuild-didc` is a CLI tool for generating JavaScript or TypeScript content from a DID file using the [didc](https://github.com/dfinity/candid) tool.
+`junobuild-didc` is a CLI tool for generating JavaScript, TypeScript, or DID output from a Candid `.did` file using the [didc](https://github.com/dfinity/candid) tool.
 
 This utility is designed to be integrated in Juno's CLI.
 

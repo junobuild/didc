@@ -70,6 +70,11 @@ fn test_ts_target() {
 }
 
 #[test]
+fn test_did_target() {
+    run_test_for_target("did", "tests/data/output.did", None);
+}
+
+#[test]
 fn test_js_target_with_output_file() {
     run_test_for_target(
         "js",
@@ -84,5 +89,14 @@ fn test_ts_target_with_output_file() {
         "ts",
         "tests/data/satellite.ts",
         Some("target/test/output.ts"),
+    );
+}
+
+#[test]
+fn test_did_target_with_output_file() {
+    run_test_for_target(
+        "did",
+        "tests/data/output.did",
+        Some("target/test/custom_output.did"),
     );
 }
