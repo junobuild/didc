@@ -319,6 +319,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         [],
       ),
+
     'set_custom_domain' : IDL.Func([IDL.Text, IDL.Opt(IDL.Text)], [], []),
     'set_db_config' : IDL.Func([DbConfig], [], []),
     'set_doc' : IDL.Func([IDL.Text, IDL.Text, SetDoc], [Doc], []),
