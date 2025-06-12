@@ -1,1 +1,3 @@
-service : { build_version : () -> (text) query }
+type DemoArg = record { status : text; message : text };
+type Result = variant { Ok : text; Err : text };
+service : { demo : (DemoArg) -> (Result) query; say : () -> () query }
