@@ -196,7 +196,7 @@ type UploadChunk = record {
   order_id : opt nat;
 };
 type UploadChunkResult = record { chunk_id : nat };
-service : {
+service : () -> {
   commit_asset_upload : (CommitBatch) -> ();
   count_assets : (text, ListParams) -> (nat64) query;
   count_collection_assets : (text) -> (nat64) query;
@@ -213,7 +213,6 @@ service : {
   del_many_assets : (vec record { text; text }) -> ();
   del_many_docs : (vec record { text; text; DelDoc }) -> ();
   del_rule : (RulesType, text, DelRule) -> ();
-  demo : (DemoArg) -> (Result) query;
   deposit_cycles : (DepositCyclesArgs) -> ();
   get_asset : (text, text) -> (opt AssetNoContent) query;
   get_auth_config : () -> (opt AuthenticationConfig) query;
@@ -238,7 +237,6 @@ service : {
   list_docs : (text, ListParams) -> (ListResults_1) query;
   list_rules : (RulesType) -> (vec record { text; Rule }) query;
   memory_size : () -> (MemorySize) query;
-  say : () -> () query;
   set_auth_config : (AuthenticationConfig) -> ();
   set_controllers : (SetControllersArgs) -> (
       vec record { principal; Controller },
@@ -253,4 +251,6 @@ service : {
   set_storage_config : (StorageConfig) -> ();
   upload_asset_chunk : (UploadChunk) -> (UploadChunkResult);
   version : () -> (text) query;
+  demo : (DemoArg) -> (Result) query;
+  say : () -> () query;
 }

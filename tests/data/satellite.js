@@ -49,8 +49,6 @@ export const idlFactory = ({ IDL }) => {
   const DelDoc = IDL.Record({ 'version' : IDL.Opt(IDL.Nat64) });
   const RulesType = IDL.Variant({ 'Db' : IDL.Null, 'Storage' : IDL.Null });
   const DelRule = IDL.Record({ 'version' : IDL.Opt(IDL.Nat64) });
-  const DemoArg = IDL.Record({ 'status' : IDL.Text, 'message' : IDL.Text });
-  const Result = IDL.Variant({ 'Ok' : IDL.Text, 'Err' : IDL.Text });
   const DepositCyclesArgs = IDL.Record({
     'cycles' : IDL.Nat,
     'destination_id' : IDL.Principal,
@@ -106,7 +104,7 @@ export const idlFactory = ({ IDL }) => {
     'iframe' : IDL.Opt(StorageConfigIFrame),
     'rewrites' : IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text)),
     'headers' : IDL.Vec(
-      IDL.Tuple(IDL.Text, IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text)))
+        IDL.Tuple(IDL.Text, IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text)))
     ),
     'max_memory_size' : IDL.Opt(ConfigMaxMemorySize),
     'raw_access' : IDL.Opt(StorageConfigRawAccess),
@@ -234,6 +232,8 @@ export const idlFactory = ({ IDL }) => {
     'order_id' : IDL.Opt(IDL.Nat),
   });
   const UploadChunkResult = IDL.Record({ 'chunk_id' : IDL.Nat });
+  const DemoArg = IDL.Record({ 'status' : IDL.Text, 'message' : IDL.Text });
+  const Result = IDL.Variant({ 'Ok' : IDL.Text, 'Err' : IDL.Text });
   return IDL.Service({
     'commit_asset_upload' : IDL.Func([CommitBatch], [], []),
     'count_assets' : IDL.Func([IDL.Text, ListParams], [IDL.Nat64], ['query']),
@@ -246,7 +246,7 @@ export const idlFactory = ({ IDL }) => {
         [DeleteControllersArgs],
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         [],
-      ),
+    ),
     'del_custom_domain' : IDL.Func([IDL.Text], [], []),
     'del_doc' : IDL.Func([IDL.Text, IDL.Text, DelDoc], [], []),
     'del_docs' : IDL.Func([IDL.Text], [], []),
@@ -254,25 +254,24 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],
         [],
         [],
-      ),
+    ),
     'del_many_docs' : IDL.Func(
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text, DelDoc))],
         [],
         [],
-      ),
+    ),
     'del_rule' : IDL.Func([RulesType, IDL.Text, DelRule], [], []),
-    'demo' : IDL.Func([DemoArg], [Result], ['query']),
     'deposit_cycles' : IDL.Func([DepositCyclesArgs], [], []),
     'get_asset' : IDL.Func(
         [IDL.Text, IDL.Text],
         [IDL.Opt(AssetNoContent)],
         ['query'],
-      ),
+    ),
     'get_auth_config' : IDL.Func(
         [],
         [IDL.Opt(AuthenticationConfig)],
         ['query'],
-      ),
+    ),
     'get_config' : IDL.Func([], [Config], []),
     'get_db_config' : IDL.Func([], [IDL.Opt(DbConfig)], ['query']),
     'get_doc' : IDL.Func([IDL.Text, IDL.Text], [IDL.Opt(Doc)], ['query']),
@@ -280,45 +279,44 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Opt(AssetNoContent)))],
         ['query'],
-      ),
+    ),
     'get_many_docs' : IDL.Func(
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text))],
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Opt(Doc)))],
         ['query'],
-      ),
+    ),
     'get_storage_config' : IDL.Func([], [StorageConfig], ['query']),
     'http_request' : IDL.Func([HttpRequest], [HttpResponse], ['query']),
     'http_request_streaming_callback' : IDL.Func(
         [StreamingCallbackToken],
         [StreamingCallbackHttpResponse],
         ['query'],
-      ),
+    ),
     'init_asset_upload' : IDL.Func([InitAssetKey], [InitUploadResult], []),
     'list_assets' : IDL.Func([IDL.Text, ListParams], [ListResults], ['query']),
     'list_controllers' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         ['query'],
-      ),
+    ),
     'list_custom_domains' : IDL.Func(
         [],
         [IDL.Vec(IDL.Tuple(IDL.Text, CustomDomain))],
         ['query'],
-      ),
+    ),
     'list_docs' : IDL.Func([IDL.Text, ListParams], [ListResults_1], ['query']),
     'list_rules' : IDL.Func(
         [RulesType],
         [IDL.Vec(IDL.Tuple(IDL.Text, Rule))],
         ['query'],
-      ),
+    ),
     'memory_size' : IDL.Func([], [MemorySize], ['query']),
-    'say' : IDL.Func([], [], ['query']),
     'set_auth_config' : IDL.Func([AuthenticationConfig], [], []),
     'set_controllers' : IDL.Func(
         [SetControllersArgs],
         [IDL.Vec(IDL.Tuple(IDL.Principal, Controller))],
         [],
-      ),
+    ),
     'set_custom_domain' : IDL.Func([IDL.Text, IDL.Opt(IDL.Text)], [], []),
     'set_db_config' : IDL.Func([DbConfig], [], []),
     'set_doc' : IDL.Func([IDL.Text, IDL.Text, SetDoc], [Doc], []),
@@ -326,11 +324,13 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, IDL.Text, SetDoc))],
         [IDL.Vec(IDL.Tuple(IDL.Text, Doc))],
         [],
-      ),
+    ),
     'set_rule' : IDL.Func([RulesType, IDL.Text, SetRule], [], []),
     'set_storage_config' : IDL.Func([StorageConfig], [], []),
     'upload_asset_chunk' : IDL.Func([UploadChunk], [UploadChunkResult], []),
     'version' : IDL.Func([], [IDL.Text], ['query']),
+    'demo' : IDL.Func([DemoArg], [Result], ['query']),
+    'say' : IDL.Func([], [], ['query']),
   });
 };
 export const init = ({ IDL }) => { return []; };
