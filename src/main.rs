@@ -61,10 +61,10 @@ fn write_output(output_path: &Path, content: &str) -> Result<()> {
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
-    let (env, actor) = pretty_check_file(&cli.input)?;
+    let (env, actor, prog) = pretty_check_file(&cli.input)?;
 
     let content = match cli.target.as_str() {
-        "ts" => typescript::compile(&env, &actor),
+        "ts" => typescript::compile(&env, &actor, &prog),
         "js" => javascript::compile(&env, &actor),
         "did" => pretty::candid::compile(&env, &actor),
         _ => unreachable!(),

@@ -17,6 +17,6 @@ name = "junobuild-didc"
 path = "src/main.rs"
 
 [dependencies]
-candid_parser = "0.1.4"
+candid_parser = "0.2.2"
 clap = { version = "4", features = ["derive"] }
 anyhow = "1.0.87"
