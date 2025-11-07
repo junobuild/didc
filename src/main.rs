@@ -1,3 +1,6 @@
+mod utils;
+
+use crate::utils::update_icp_sdk_imports;
 use anyhow::Result;
 use candid_parser::bindings::{javascript, typescript};
 use candid_parser::pretty;
@@ -64,7 +67,10 @@ fn main() -> Result<()> {
     let (env, actor, prog) = pretty_check_file(&cli.input)?;
 
     let content = match cli.target.as_str() {
-        "ts" => typescript::compile(&env, &actor, &prog),
+        "ts" => {
+            let ts = typescript::compile(&env, &actor, &prog);
+            update_icp_sdk_imports(&ts)
+        }
         "js" => javascript::compile(&env, &actor),
         "did" => pretty::candid::compile(&env, &actor),
         _ => unreachable!(),

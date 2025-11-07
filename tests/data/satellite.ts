@@ -1,6 +1,6 @@
-import type { Principal } from '@dfinity/principal';
-import type { ActorMethod } from '@dfinity/agent';
-import type { IDL } from '@dfinity/candid';
+import type { Principal } from '@icp-sdk/core/principal';
+import type { ActorMethod } from '@icp-sdk/core/agent';
+import type { IDL } from '@icp-sdk/core/candid';
 
 export interface AssetEncodingNoContent {
   'modified' : bigint,
@@ -51,7 +51,7 @@ export interface Controller {
   'expires_at' : [] | [bigint],
 }
 export type ControllerScope = { 'Write' : null } |
-    { 'Admin' : null };
+  { 'Admin' : null };
 export interface CustomDomain {
   'updated_at' : bigint,
   'created_at' : bigint,
@@ -105,8 +105,8 @@ export interface ListMatcher {
 }
 export interface ListOrder { 'field' : ListOrderField, 'desc' : boolean }
 export type ListOrderField = { 'UpdatedAt' : null } |
-    { 'Keys' : null } |
-    { 'CreatedAt' : null };
+  { 'Keys' : null } |
+  { 'CreatedAt' : null };
 export interface ListPaginate {
   'start_after' : [] | [string],
   'limit' : [] | [bigint],
@@ -132,14 +132,14 @@ export interface ListResults_1 {
   'items_length' : bigint,
 }
 export type Memory = { 'Heap' : null } |
-    { 'Stable' : null };
+  { 'Stable' : null };
 export interface MemorySize { 'stable' : bigint, 'heap' : bigint }
 export type Permission = { 'Controllers' : null } |
-    { 'Private' : null } |
-    { 'Public' : null } |
-    { 'Managed' : null };
+  { 'Private' : null } |
+  { 'Public' : null } |
+  { 'Managed' : null };
 export type Result = { 'Ok' : string } |
-    { 'Err' : string };
+  { 'Err' : string };
 export interface Rule {
   'max_capacity' : [] | [number],
   'memory' : [] | [Memory],
@@ -152,7 +152,7 @@ export interface Rule {
   'write' : Permission,
 }
 export type RulesType = { 'Db' : null } |
-    { 'Storage' : null };
+  { 'Storage' : null };
 export interface SetController {
   'metadata' : Array<[string, string]>,
   'scope' : ControllerScope,
@@ -185,10 +185,10 @@ export interface StorageConfig {
   'redirects' : [] | [Array<[string, StorageConfigRedirect]>],
 }
 export type StorageConfigIFrame = { 'Deny' : null } |
-    { 'AllowAny' : null } |
-    { 'SameOrigin' : null };
+  { 'AllowAny' : null } |
+  { 'SameOrigin' : null };
 export type StorageConfigRawAccess = { 'Deny' : null } |
-    { 'Allow' : null };
+  { 'Allow' : null };
 export interface StorageConfigRedirect {
   'status_code' : number,
   'location' : string,
@@ -207,15 +207,15 @@ export interface StreamingCallbackToken {
   'full_path' : string,
 }
 export type StreamingStrategy = {
-  'Callback' : {
-    'token' : StreamingCallbackToken,
-    'callback' : [Principal, string],
-  }
-};
+    'Callback' : {
+      'token' : StreamingCallbackToken,
+      'callback' : [Principal, string],
+    }
+  };
 export type TimestampMatcher = { 'Equal' : bigint } |
-    { 'Between' : [bigint, bigint] } |
-    { 'GreaterThan' : bigint } |
-    { 'LessThan' : bigint };
+  { 'Between' : [bigint, bigint] } |
+  { 'GreaterThan' : bigint } |
+  { 'LessThan' : bigint };
 export interface UploadChunk {
   'content' : Uint8Array | number[],
   'batch_id' : bigint,
@@ -231,8 +231,8 @@ export interface _SERVICE {
   'del_asset' : ActorMethod<[string, string], undefined>,
   'del_assets' : ActorMethod<[string], undefined>,
   'del_controllers' : ActorMethod<
-      [DeleteControllersArgs],
-      Array<[Principal, Controller]>
+    [DeleteControllersArgs],
+    Array<[Principal, Controller]>
   >,
   'del_custom_domain' : ActorMethod<[string], undefined>,
   'del_doc' : ActorMethod<[string, string, DelDoc], undefined>,
@@ -247,18 +247,18 @@ export interface _SERVICE {
   'get_db_config' : ActorMethod<[], [] | [DbConfig]>,
   'get_doc' : ActorMethod<[string, string], [] | [Doc]>,
   'get_many_assets' : ActorMethod<
-      [Array<[string, string]>],
-      Array<[string, [] | [AssetNoContent]]>
+    [Array<[string, string]>],
+    Array<[string, [] | [AssetNoContent]]>
   >,
   'get_many_docs' : ActorMethod<
-      [Array<[string, string]>],
-      Array<[string, [] | [Doc]]>
+    [Array<[string, string]>],
+    Array<[string, [] | [Doc]]>
   >,
   'get_storage_config' : ActorMethod<[], StorageConfig>,
   'http_request' : ActorMethod<[HttpRequest], HttpResponse>,
   'http_request_streaming_callback' : ActorMethod<
-      [StreamingCallbackToken],
-      StreamingCallbackHttpResponse
+    [StreamingCallbackToken],
+    StreamingCallbackHttpResponse
   >,
   'init_asset_upload' : ActorMethod<[InitAssetKey], InitUploadResult>,
   'list_assets' : ActorMethod<[string, ListParams], ListResults>,
@@ -269,15 +269,15 @@ export interface _SERVICE {
   'memory_size' : ActorMethod<[], MemorySize>,
   'set_auth_config' : ActorMethod<[AuthenticationConfig], undefined>,
   'set_controllers' : ActorMethod<
-      [SetControllersArgs],
-      Array<[Principal, Controller]>
+    [SetControllersArgs],
+    Array<[Principal, Controller]>
   >,
   'set_custom_domain' : ActorMethod<[string, [] | [string]], undefined>,
   'set_db_config' : ActorMethod<[DbConfig], undefined>,
   'set_doc' : ActorMethod<[string, string, SetDoc], Doc>,
   'set_many_docs' : ActorMethod<
-      [Array<[string, string, SetDoc]>],
-      Array<[string, Doc]>
+    [Array<[string, string, SetDoc]>],
+    Array<[string, Doc]>
   >,
   'set_rule' : ActorMethod<[RulesType, string, SetRule], undefined>,
   'set_storage_config' : ActorMethod<[StorageConfig], undefined>,
